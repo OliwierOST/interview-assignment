@@ -27,7 +27,7 @@ export function PhoneSelectionModal({
   setShowModal,
 }: PhoneSelectionModalProps) {
   const [country, setCountry] = useState<Country | null>(null)
-  const [phoneNumber, setPhoneNumber] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState<string>("")
   const [showSelect, setShowSelect] = useState<boolean>(false)
 
   const handleClose = () => {

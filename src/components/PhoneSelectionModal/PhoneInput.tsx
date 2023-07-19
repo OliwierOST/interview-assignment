@@ -15,7 +15,8 @@ export default function PhoneInput({
 
     const formattedValue = cleanedValue.replace(
       /(\d{3})(\d{1,3})?(\d{1,3})?/,
-      (_, p1, p2, p3) => [p1, p2, p3].filter((group) => !!group).join("-")
+      (_, p1, p2, p3) =>
+        [p1, p2, p3].filter((group: string) => !!group).join("-")
     )
 
     return formattedValue
@@ -26,9 +27,10 @@ export default function PhoneInput({
   ) => {
     const inputPhoneNumber = event.currentTarget.value
     const formattedPhoneNumber = formatPhoneNumber(inputPhoneNumber)
-    console.log(formattedPhoneNumber)
+
     setPhoneNumber(formattedPhoneNumber)
   }
+
   return (
     <TextField
       fullWidth
