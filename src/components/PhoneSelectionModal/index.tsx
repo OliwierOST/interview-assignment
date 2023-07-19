@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import "@fontsource/poppins"
 import { Stack, Typography, Modal, Button } from "@mui/material"
 import { styled } from "@mui/system"
-import { type Country } from "../../data/countries"
+import { countries, type Country } from "../../data/countries"
 import { CountryAutocomplete } from "./CountryAutocomplete"
 import PhoneInput from "./PhoneInput"
 
@@ -26,7 +26,8 @@ export function PhoneSelectionModal({
   showModal,
   setShowModal,
 }: PhoneSelectionModalProps) {
-  const [country, setCountry] = useState<Country | null>(null)
+  const initialCountry = countries.find((country) => country.label === "Poland")
+  const [country, setCountry] = useState<Country | undefined>(initialCountry)
   const [phoneNumber, setPhoneNumber] = useState<string>("")
   const [showSelect, setShowSelect] = useState<boolean>(false)
 
@@ -100,7 +101,7 @@ export function PhoneSelectionModal({
             variant="outlined"
             sx={{ textTransform: "none", color: "#28293D" }}
             onClick={() => {
-              setCountry(null)
+              setCountry(initialCountry)
               setPhoneNumber("")
             }}
           >
@@ -108,7 +109,13 @@ export function PhoneSelectionModal({
           </ModalButton>
           <ModalButton
             variant="contained"
-            sx={{ textTransform: "none", bgcolor: "#5870E0" }}
+            sx={{
+              textTransform: "none",
+              bgcolor: "#5870E0",
+              ":hover": {
+                bgcolor: "#5978eb",
+              },
+            }}
             onClick={() => setShowModal(false)}
           >
             Save

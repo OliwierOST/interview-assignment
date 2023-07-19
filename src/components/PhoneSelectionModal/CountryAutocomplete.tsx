@@ -12,8 +12,8 @@ import SearchIcon from "@mui/icons-material/Search"
 interface CountryAutocompleteProps {
   showSelect: boolean
   setShowSelect: (showSelect: boolean) => void
-  country: Country | null
-  setCountry: (country: Country | null) => void
+  country: Country | undefined
+  setCountry: (country: Country | undefined) => void
 }
 
 export function CountryAutocomplete({
