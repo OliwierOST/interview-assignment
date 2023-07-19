@@ -1,10 +1,35 @@
-type Primitive = string | (() => string)
+type StringFunction = () => string
 
-type DeepReadonly<T> = {
-  readonly [K in keyof T]: T[K] extends Primitive ? T[K] : DeepReadonly<T[K]>
+type ReturnTypeString<T extends (...args: any[]) => any> =
+  ReturnType<T> extends string ? T : never
+
+type ConstrainedPrimitive = string | ReturnTypeString<StringFunction>
+
+type DeepReadonlyConstrained<T> = {
+  readonly [K in keyof T]: T[K] extends ConstrainedPrimitive
+    ? T[K]
+    : T[K] extends object
+    ? Exclude<T[K], {}> extends never
+      ? never
+      : DeepReadonlyConstrained<T[K]>
+    : never
 }
 
-function typedFreeze(obj: any): DeepReadonly<typeof obj> {
+function typedFreeze(obj: any): DeepReadonlyConstrained<any> {
+  for (const prop in obj) {
+    const value = obj[prop]
+    if (
+      typeof value !== "string" &&
+      (typeof value !== "function" ||
+        typeof (value as Function)() !== "string") &&
+      (typeof value !== "object" || Object.keys(value).length === 0)
+    ) {
+      throw new TypeError(
+        `Invalid leaf property '${prop}'. Expected 'string' or '() => string', and non-empty object.`
+      )
+    }
+  }
+
   Object.freeze(obj)
 
   Object.getOwnPropertyNames(obj).forEach((prop) => {
@@ -18,7 +43,7 @@ function typedFreeze(obj: any): DeepReadonly<typeof obj> {
     }
   })
 
-  return obj
+  return obj as DeepReadonlyConstrained<any>
 }
 
 export { typedFreeze }
