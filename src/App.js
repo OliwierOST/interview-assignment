@@ -1,3 +1,4 @@
+import { PhoneSelectionModal } from "./components/PhoneSelectionModal"
 import { Stack, Button } from "@mui/material"
 import { useState } from "react"
 
@@ -9,6 +10,7 @@ function App() {
       <Button variant="contained" onClick={() => setShowModal(true)}>
         Open modal
       </Button>
+      <PhoneSelectionModal showModal={showModal} setShowModal={setShowModal} />
     </Stack>
   )
 }
