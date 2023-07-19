@@ -40,4 +40,11 @@ describe("typedFreeze", () => {
     expect(() => (frozenObject.y.a = "foo")).toThrow(TypeError)
     expect(() => (frozenObject.y.b.c = () => "new function")).toThrow(TypeError)
   })
+
+  it("works for arrays", () => {
+    // @ts-expect-error
+    expect(() => (frozenArray[0] = "foo")).toThrow(TypeError)
+    // @ts-expect-error
+    expect(() => (frozenArray[1] = "bar").toThrow(TypeError))
+  })
 })
