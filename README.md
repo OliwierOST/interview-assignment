@@ -1,4 +1,4 @@
-### `npm test -- src/tests/typedFreeze.test.ts --coverage --collectCoverageFrom=src/utils/typedFreeze.tst`
+##### `npm test -- src/tests/typedFreeze.test.ts --coverage --collectCoverageFrom=src/utils/typedFreeze.tst`
 
 Runs the test cases for typedFreeze.tsx
 The test results are available here:
