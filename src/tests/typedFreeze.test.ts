@@ -28,4 +28,11 @@ describe("typedFreeze", () => {
   const frozenObject = typedFreeze(testObject)
 
   const frozenArray = typedFreeze(testArray)
+
+  it("works for non-nested objects", () => {
+    expect(() => {
+      // @ts-expect-error
+      frozenObject.x = "bar"
+    }).toThrow(TypeError)
+  })
 })
