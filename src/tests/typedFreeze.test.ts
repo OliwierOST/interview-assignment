@@ -35,4 +35,9 @@ describe("typedFreeze", () => {
       frozenObject.x = "bar"
     }).toThrow(TypeError)
   })
+
+  it("works for nested objects", () => {
+    expect(() => (frozenObject.y.a = "foo")).toThrow(TypeError)
+    expect(() => (frozenObject.y.b.c = () => "new function")).toThrow(TypeError)
+  })
 })
