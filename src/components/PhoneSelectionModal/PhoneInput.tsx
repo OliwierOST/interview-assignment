@@ -15,7 +15,7 @@ export default function PhoneInput({
 
     const formattedValue = cleanedValue.replace(
       /(\d{3})(\d{1,3})?(\d{1,3})?/,
-      (_, p1, p2, p3) =>
+      (_, p1: string, p2: string, p3: string) =>
         [p1, p2, p3].filter((group: string) => !!group).join("-")
     )
 

@@ -52,7 +52,6 @@ describe("typedFreeze", () => {
     expect(() => {
       const invalidObject = { x: "foo", y: { a: 5, b: { c: () => "foo" } } }
       const frozenInvalidObject = typedFreeze(invalidObject)
-      return frozenInvalidObject
     }).toThrow(TypeError)
     expect(() => {
       const invalidObject = {
@@ -60,7 +59,6 @@ describe("typedFreeze", () => {
         y: { a: () => 5, b: { c: () => "foo" } },
       }
       const frozenInvalidObject = typedFreeze(invalidObject)
-      return frozenInvalidObject
     }).toThrow(TypeError)
   })
 
